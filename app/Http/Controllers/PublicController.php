@@ -47,7 +47,7 @@ class PublicController extends Controller
             });
         }
 
-        $products = $products->paginate(4);
+        $products = $products->paginate(40);
         return view("home", compact('total', 'totalCats', 'products', 'productcats', 'search', 'sort', 'category_slug'));
     }
 }
