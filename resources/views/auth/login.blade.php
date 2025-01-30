@@ -1,0 +1,38 @@
+<x-layout>
+    <div class="max-w-lg mx-auto shadow-none lg:shadow-md rounded-md my-12 p-2 lg:p-8">
+        <h1>Login</h1>
+        <form action="{{ route('login') }}" method="POST">
+            @csrf
+
+            {{-- email --}}
+            <div class="mb-3">
+                <label for="email" class="label">email</label>
+                <input type="text" id="email" name="email"
+                    class="input @error('email') ring-1 ring-red-500 @enderror" value="{{ old('email') }}"
+                    placeholder="Email address">
+                @error('email')
+                    <p class="text-error">{{ $message }}</p>
+                @enderror
+            </div>
+
+            {{-- password --}}
+            <div class="mb-3">
+                <label for="password" class="label">password</label>
+                <input type="password" id="password" name="password"
+                    class="input @error('password') ring-1 ring-red-500 @enderror" value="{{ old('password') }}"
+                    placeholder="********">
+                @error('password')
+                    <p class="text-error">{{ $message }}</p>
+                @enderror
+            </div>
+
+            {{-- remember me --}}
+            <div class="mb-4 flex items-center gap-2">
+                <input type="checkbox" name="remember" id="remember">
+                <label for="remember" class="text-sm font-medium">Remember me</label>
+            </div>
+
+            <button type="submit" class="btn">Login</button>
+        </form>
+    </div>
+</x-layout>

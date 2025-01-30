@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.ck-editor__editable {
+    @apply h-24 resize-y;
+}
+
+.ck-editor__editable p {
+    @apply mb-4;
+}
+
+.ck-editor__editable h2,
+.text-content h2 {
+    @apply font-semibold text-lg mb-2 text-gray-800;
+}
+
+.text-content {
+    @apply leading-relaxed text-gray-600 space-y-4 mt-4;
+}
+
+.ck-editor__editable ol,
+.text-content ol {
+    @apply list-decimal mb-4 ml-8;
+}
+
+.ck-editor__editable ol li,
+.text-content ol li {
+    @apply pl-2;
+}
+
+.ck-editor__editable ul,
+.text-content ul {
+    @apply list-disc mb-4 ml-8;
+}
+
+.ck-editor__editable ul li,
+.text-content ul li {
+    @apply pl-2;
+}
+
+.btn {
+    @apply font-medium rounded-full py-2 px-4 lg:px-6 bg-blue-500 hover:bg-blue-600 flex gap-2 items-center justify-center transition text-white;
+}
+
+.badge-filter {
+    @apply min-w-max font-medium capitalize rounded-lg bg-blue-100 hover:bg-blue-200 text-black/80 hover:border-blue-500 text-sm py-2 px-3 cursor-pointer transition;
+}
+
+.text-content p {
+    @apply mb-4;
+}
+
+.btn {
+    @apply py-2 px-3 rounded-lg text-white bg-blue-500 hover:bg-blue-600 transition-all min-w-max;
+}
+
+h1 {
+    @apply text-2xl font-bold mb-4;
+}
+
+.overflow-x-scroll::-webkit-scrollbar {
+    @apply hidden;
+}
+
+.error {
+    @apply text-red-500 text-sm mt-1;
+}
+
+/* .input {
+    @apply border w-full block py-2 px-3 rounded-md focus:outline-none;
+} */
+
+.input,
+.select {
+    @apply border w-full py-1 px-2 mt-1 rounded ring-2 ring-transparent;
+}
+
+.label {
+    @apply pb-1 capitalize font-medium inline-block;
+}
+
+.text-error {
+    @apply text-red-500 text-sm;
+}
+
+.badge {
+    @apply border text-xs rounded-sm border-blue-500 w-fit leading-none py-[0.15rem] px-1;
+}
