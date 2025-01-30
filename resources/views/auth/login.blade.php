@@ -1,13 +1,19 @@
 <x-layout>
     <div class="max-w-lg mx-auto shadow-none lg:shadow-md rounded-md my-12 p-2 lg:p-8">
+
         <h1>Login</h1>
+
+        @if (session('error'))
+            <x-flash-msg message="{{ session('error') }}" bg="bg-red-500"></x-flash-msg>
+        @endif
+
         <form action="{{ route('login') }}" method="POST">
             @csrf
 
             {{-- email --}}
             <div class="mb-3">
                 <label for="email" class="label">email</label>
-                <input type="text" id="email" name="email"
+                <input type="text" id="email" name="email" autocomplete="off"
                     class="input @error('email') ring-1 ring-red-500 @enderror" value="{{ old('email') }}"
                     placeholder="Email address">
                 @error('email')

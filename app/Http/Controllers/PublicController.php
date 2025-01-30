@@ -11,18 +11,30 @@ class PublicController extends Controller
     public function index(Request $request)
     {
         $total = Product::count();
-        $products = Product::all();
-        $productcats = Productcat::all();
+        $totalCats = Productcat::count();
+
+        // $productcats = Productcat::orderBy('name')->get();
+        // Ambil kategori produk dan hitung jumlah produk per kategori
+        $productcats = Productcat::orderBy('name')->withCount('products')->get();
+
         $search = $request->search;
-        $sort = $request->sort ?? "cheapest";
+        $sort = $request->sort;
         $category_slug = $request->category;
 
         if ($sort === 'cheapest') {
             $products = Product::orderBy('price');
         } elseif ($sort === 'most-expensive') {
             $products = Product::orderByDesc('price');
-        } else {
+        } elseif ($sort === 'latest') {
             $products = Product::latest();
+        } elseif ($sort === 'oldest') {
+            $products = Product::oldest();
+        } elseif ($sort === 'a-z') {
+            $products = Product::orderBy('name');
+        } elseif ($sort === 'z-a') {
+            $products = Product::orderByDesc('name');
+        } else {
+            $products = Product::orderBy('name');
         }
 
         if ($search) {
@@ -35,7 +47,7 @@ class PublicController extends Controller
             });
         }
 
-        $products = $products->paginate(16);
-        return view("home", compact('total', 'products', 'productcats', 'search', 'sort', 'category_slug'));
+        $products = $products->paginate(4);
+        return view("home", compact('total', 'totalCats', 'products', 'productcats', 'search', 'sort', 'category_slug'));
     }
 }

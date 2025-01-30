@@ -1,4 +1,4 @@
-@props(['cats' => [], 'route' => 'category-blogs', 'current' => null])
+@props(['cats' => [], 'total' => 0, 'totalCats' => 0])
 
 <form method="GET" action="{{ url()->current() }}" class="flex gap-1 overflow-x-scroll">
     @if (request('search'))
@@ -16,14 +16,14 @@
     <label class="badge-filter {{ request('category') == '' ? '!bg-blue-500 !text-white' : '' }}">
         <input type="radio" name="category" value="" {{ request('category') == '' ? 'checked' : '' }}
             onchange="this.form.submit()" class="hidden">
-        <span>Semua Kategori</span>
+        <span>Semua {{ $totalCats }} Kategori ({{ $total }})</span>
     </label>
 
     @foreach ($cats as $cat)
         <label class="badge-filter {{ request('category') == $cat->slug ? '!bg-blue-500 !text-white' : '' }}">
             <input type="radio" name="category" value="{{ $cat->slug }}"
                 {{ request('category') == $cat->slug ? 'checked' : '' }} onchange="this.form.submit()" class="hidden">
-            <span>{{ $cat->name }}</span>
+            <span>{{ $cat->name }} ({{ $cat->products_count }})</span>
         </label>
     @endforeach
 

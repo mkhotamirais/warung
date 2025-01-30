@@ -13,19 +13,6 @@
         <h2 class="text-xl font-semibold mb-2">Your Products ({{ $myProducts->total() }})</h2>
 
         <form class="mb-2">
-
-            {{-- @if (request('search'))
-                <input type="hidden" name="search" value="{{ request('search') }}">
-            @endif --}}
-
-            {{-- @if (request('sort'))
-                <input type="hidden" name="sort" value="{{ request('sort') }}">
-            @endif
-
-            @if (request('category'))
-                <input type="hidden" name="category" value="{{ request('category') }}">
-            @endif --}}
-
             <div class="items-center flex sm:space-y-0">
                 <div class="relative w-full">
                     <label for="search"
@@ -45,6 +32,17 @@
                 </div>
             </div>
         </form>
+
+        @if ($search)
+            <p class="mb-4">Hasil pencarian untuk <span class="font-semibold">"{{ $search }}"</span> dari produk
+                kamu
+                ({{ $myProducts->total() }})</p>
+        @endif
+
+        @if ($myProducts->total() == 0)
+            <p class="font-semibold italic text-lg mb-2">Hasil tidak ditemukan</p>
+            <a href="{{ route('products.create') }}" class="btn w-fit">Add New</a>
+        @endif
 
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4">
             @foreach ($myProducts as $product)
@@ -73,7 +71,6 @@
     {{-- all products --}}
     <div>
         <h2 class="text-xl font-semibold mb-2">All Product ({{ $products->total() }})</h2>
-
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4">
             @foreach ($products as $product)
                 <x-product-card :product="$product"></x-product-card>

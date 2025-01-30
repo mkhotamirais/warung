@@ -32,14 +32,21 @@ class AuthController extends Controller
             "password" => "required",
         ]);
 
+        // Cek apakah email terdaftar
+        $user = User::where('email', $request->email)->first();
+        if (!$user) {
+            // return back()->withErrors([
+            //     'error' => 'Invalid credentials.'
+            // ]);
+            return back()->with('error', 'Email atau password salah.');
+        }
+
         // Try to login
         if (Auth::attempt($fields, $request->remember)) {
             // return redirect()->route('dashboard');
             return redirect()->intended();
         } else {
-            return back()->withErrors([
-                'failed' => 'Invalid credentials'
-            ]);
+            return back()->with('error', 'Email atau password salah..');
         }
     }
 

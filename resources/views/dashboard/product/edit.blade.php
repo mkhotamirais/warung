@@ -68,37 +68,90 @@
             @enderror
         </div>
 
-        {{-- <script>
-            ClassicEditor
-                .update(document.querySelector('#price_detail'))
-                .catch(error => {
-                    console.error(error);
-                });
-
-            ClassicEditor
-                .update(document.querySelector('#description'))
-                .catch(error => {
-                    console.error(error);
-                });
-        </script> --}}
-
-        @if ($product->banner)
-            <label>Current banner</label>
-            <figure class="h-40 w-64 rounded-md mb-4 overflow-hidden">
-                <img src="{{ asset('storage/' . $product->banner) }}" alt="{{ $product->name ?? 'carrental image' }}"
-                    width="400" height="400" class="w-full h-full object-cover origin-center">
-            </figure>
-        @endif
-
         {{-- product banner --}}
-        <div class="mb-3">
+        {{-- <div class="mb-3">
             <label for="banner">Banner</label>
             <input type="file" name="banner" id="banner" class="input @error('banner') !ring-red-500 @enderror">
             @error('banner')
                 <p class="error">{{ $message }}</p>
             @enderror
+        </div> --}}
+
+        @if ($product->banner)
+            <label>Current banner</label>
+            <figure class="h-40 w-64 rounded-md mb-4 overflow-hidden">
+                <img id="current-image" src="{{ asset('storage/' . $product->banner) }}"
+                    alt="{{ $product->name ?? 'Product Image' }}" width="400" height="400"
+                    class="w-full h-full object-cover origin-center">
+            </figure>
+
+            {{-- Checkbox untuk menghapus gambar --}}
+            <div class="mb-3">
+                <input type="checkbox" name="delete_banner" id="delete_banner" value="1">
+                <label for="delete_banner" class="text-red-500">Delete current image</label>
+            </div>
+        @endif
+
+        {{-- Preview Gambar Baru --}}
+        <div class="mb-3">
+            <label for="banner">Banner</label>
+            <input type="file" name="banner" id="banner" class="input @error('banner') !ring-red-500 @enderror"
+                onchange="previewImage(event)">
+            @error('banner')
+                <p class="error">{{ $message }}</p>
+            @enderror
+            <div id="preview-container" class="mt-2 hidden">
+                <img id="image-preview" src="" class="w-40 h-auto rounded shadow-md">
+                <button type="button" id="remove-image"
+                    class="text-red-500 hover:underline text-sm mt-1">Remove</button>
+            </div>
         </div>
 
+        <script>
+            function previewImage(event) {
+                const input = event.target;
+                const previewContainer = document.getElementById('preview-container');
+                const previewImage = document.getElementById('preview-image');
+
+                if (input.files && input.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        previewContainer.classList.remove('hidden');
+                        previewImage.src = e.target.result;
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            document.addEventListener("DOMContentLoaded", function() {
+                const fileInput = document.getElementById("banner");
+                const previewContainer = document.getElementById("preview-container");
+                const imagePreview = document.getElementById("image-preview");
+                const removeButton = document.getElementById("remove-image");
+
+                fileInput.addEventListener("change", function() {
+                    const file = this.files[0];
+
+                    if (file) {
+                        const reader = new FileReader();
+
+                        reader.onload = function(e) {
+                            imagePreview.src = e.target.result;
+                            previewContainer.classList.remove("hidden");
+                        };
+
+                        reader.readAsDataURL(file);
+                    }
+                });
+
+                removeButton.addEventListener("click", function() {
+                    fileInput.value = ""; // Reset file input
+                    imagePreview.src = "";
+                    previewContainer.classList.add("hidden");
+                });
+            });
+        </script>
         <button type="submit" class="btn">Save</button>
+
     </form>
 </x-authlayout>

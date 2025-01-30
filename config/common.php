@@ -8,8 +8,12 @@ return [
         ['name' => 'Users', 'route' => 'users']
     ],
     'sorting-price' => [
-        'latest' => 'Terbaru',
+        '' => 'Default',
         'cheapest' => 'Termurah',
-        'most-expensive' => 'Termahal'
+        'most-expensive' => 'Termahal',
+        'latest' => 'Terbaru',
+        'oldest' => 'Terlama',
+        'a-z' => 'A-Z',
+        'z-a' => 'Z-A'
     ],
 ];

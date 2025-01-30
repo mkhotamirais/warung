@@ -29,12 +29,12 @@
             @enderror
         </div>
 
-        {{-- product price_detail --}}
+        {{-- product price_details --}}
         <div class="mb-3">
-            <label for="price_detail">Price Detail</label>
-            <textarea name="price_detail" id="price_detail" cols="30" rows="2"
-                class="input @error('price_detail') !ring-red-500 @enderror">{{ old('price_detail') }}</textarea>
-            @error('price_detail')
+            <label for="price_details">Price Details</label>
+            <textarea name="price_details" id="price_details" cols="30" rows="2"
+                class="input @error('price_details') !ring-red-500 @enderror">{{ old('price_details') }}</textarea>
+            @error('price_details')
                 <p class="error">{{ $message }}</p>
             @enderror
         </div>
@@ -66,29 +66,50 @@
             @enderror
         </div>
 
-        {{-- <script>
-            ClassicEditor
-                .create(document.querySelector('#price_detail'))
-                .catch(error => {
-                    console.error(error);
-                });
-
-            ClassicEditor
-                .create(document.querySelector('#description'))
-                .catch(error => {
-                    console.error(error);
-                });
-        </script> --}}
-
-        {{-- product banner --}}
         <div class="mb-3">
             <label for="banner">Banner</label>
             <input type="file" name="banner" id="banner" class="input @error('banner') !ring-red-500 @enderror">
             @error('banner')
                 <p class="error">{{ $message }}</p>
             @enderror
+            <div id="preview-container" class="mt-2 hidden">
+                <img id="image-preview" src="" class="w-40 h-auto rounded shadow-md">
+                <button type="button" id="remove-image"
+                    class="text-red-500 hover:underline text-sm mt-1">Remove</button>
+            </div>
         </div>
 
         <button type="submit" class="btn">Create</button>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const fileInput = document.getElementById("banner");
+                const previewContainer = document.getElementById("preview-container");
+                const imagePreview = document.getElementById("image-preview");
+                const removeButton = document.getElementById("remove-image");
+
+                fileInput.addEventListener("change", function() {
+                    const file = this.files[0];
+
+                    if (file) {
+                        const reader = new FileReader();
+
+                        reader.onload = function(e) {
+                            imagePreview.src = e.target.result;
+                            previewContainer.classList.remove("hidden");
+                        };
+
+                        reader.readAsDataURL(file);
+                    }
+                });
+
+                removeButton.addEventListener("click", function() {
+                    fileInput.value = ""; // Reset file input
+                    imagePreview.src = "";
+                    previewContainer.classList.add("hidden");
+                });
+            });
+        </script>
+
     </form>
 </x-authlayout>

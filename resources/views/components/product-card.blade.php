@@ -10,7 +10,8 @@
     <div class="relative p-2 flex flex-col">
         <div class="flex justify-between gap-2">
             <div class="grow">
-                <h3 class="text capitalize leading-tight mb-2 grow">{{ Str::words($product->name, 6, '...') }}</h3>
+                {{-- <h3 class="text capitalize leading-tight mb-2 grow">{{ Str::words($product->name, 6, '...') }}</h3> --}}
+                <h3 class="text capitalize leading-tight mb-2 grow">{{ $product->name }}</h3>
                 <div class="badge">{{ $product->productcat->name }}</div>
                 <p class="text-lg font-semibold">Rp{{ number_format($product->price, 0, ',', '.') }}</p>
             </div>

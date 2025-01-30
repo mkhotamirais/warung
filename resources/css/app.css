@@ -87,3 +87,14 @@ h1 {
 .badge {
     @apply border text-xs rounded-sm border-blue-500 w-fit leading-none py-[0.15rem] px-1;
 }
+
+.paginate nav div span,
+.paginate nav div a {
+    @apply bg-blue-500 text-white;
+}
+
+@media screen and (min-width: 640px) {
+    .paginate nav div span {
+        @apply bg-white text-gray-700;
+    }
+}
