@@ -43,6 +43,30 @@
         <x-badge-cat :totalCats="$totalCats" :total="$total" :cats="$productcats" />
     </div>
 
+    @if ($search || $sort || $category_slug)
+        <div>
+            <p class="mb-4">
+                @if ($search)
+                    Hasil pencarian <span class="font-semibold">"{{ $search }}"</span>
+                @endif
+                @if ($sort)
+                    Sorting <span class="font-semibold">"{{ $sort }}"</span>
+                @endif
+                @if ($category_slug)
+                    kategori <span class="font-semibold">"{{ $category_slug }}"</span>
+                @endif
+                ({{ $products->total() }})
+            </p>
+        </div>
+    @endif
+
+    @if ($products->total() == 0)
+        <p class="font-semibold italic text-lg mb-2">Hasil tidak ditemukan</p>
+        @auth
+            <a href="{{ route('products.create') }}" class="btn w-fit">Tambah Baru</a>
+        @endauth
+    @endif
+
     <div>
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-1 lg:gap-2">
             @foreach ($products as $product)

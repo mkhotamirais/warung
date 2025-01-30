@@ -20,7 +20,9 @@
     <header class="h-16 bg-white sticky top-0 z-50 border-b">
         <div class="container flex items-center justify-between h-full">
             <x-logo></x-logo>
-
+            @auth
+                <a href="{{ route('dashboard') }}" class="btn">Dashboard</a>
+            @endauth
             {{-- desktop nav --}}
             {{-- <div class="hidden lg:flex">
                 <nav class="flex">
@@ -59,10 +61,6 @@
     <footer class="h-16 border-t mt-4">
         <div class="container flex flex-col items-center justify-center h-full">
             <p>@warungota2025</p>
-            <div class="flex gap-2 opacity-0">
-                <a href="{{ route('login') }}">login</a>
-                <a href="{{ route('register') }}">register</a>
-            </div>
         </div>
     </footer>
 </body>
