@@ -1,10 +1,10 @@
 @props(['product' => []])
 
 <div x-data="{ show: false }" x-on:mouseenter="show = true" x-on:mouseleave="show = false"
-    class="relative border transition rounded-lg overflow-hidden flex flex-col">
+    class="relative border transition rounded-lg overflow-hidden flex flex-col bg-white">
     @if ($product->banner)
         <img src="{{ asset('storage/' . $product->banner) }}" alt="{{ $product->title ?? 'product banner' }}"
-            class="object-cover object-center w-full h-40 bg-gray-100">
+            class="object-cover object-center w-full h-40 lg:h-52 bg-gray-100">
     @endif
 
     <div class="relative p-2 flex flex-col">
@@ -15,7 +15,8 @@
                 <div class="badge">{{ $product->productcat->name }}</div>
                 <p class="text-lg font-semibold">Rp{{ number_format($product->price, 0, ',', '.') }}</p>
             </div>
-            <x-bi-chevron-down class="size-4" />
+            <x-bi-chevron-down x-show="!show" class="size-4 w-max" />
+            <x-bi-chevron-up x-show="show" class="size-4 w-max" />
         </div>
         <div :class="show ? 'block' : 'hidden'" class="transition text-sm space-y-2 mt-2">
             <div class="text-content text-sm grow">

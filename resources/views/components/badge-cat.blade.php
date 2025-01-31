@@ -1,6 +1,6 @@
 @props(['cats' => [], 'total' => 0, 'totalCats' => 0])
 
-<form method="GET" action="{{ url()->current() }}" class="flex gap-1 overflow-x-scroll">
+<form method="GET" action="{{ url()->current() }}" class="flex gap-1 flex-wrap">
     @if (request('search'))
         <input type="hidden" name="search" value="{{ request('search') }}">
     @endif
@@ -12,6 +12,10 @@
     {{-- @if (request('category'))
         <input type="hidden" name="category" value="{{ request('category') }}">
     @endif --}}
+
+    @if (request('filter_image'))
+        <input type="hidden" name="filter_image" value="{{ request('filter_image') }}">
+    @endif
 
     <label class="badge-filter {{ request('category') == '' ? '!bg-blue-500 !text-white' : '' }}">
         <input type="radio" name="category" value="" {{ request('category') == '' ? 'checked' : '' }}
@@ -28,7 +32,7 @@
     @endforeach
 
     {{-- Blur effect on the right --}}
-    <div
+    {{-- <div
         class="block lg:hidden absolute top-0 right-0 h-full w-8 bg-gradient-to-l from-white via-white/40 to-transparent pointer-events-none">
-    </div>
+    </div> --}}
 </form>

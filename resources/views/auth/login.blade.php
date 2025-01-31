@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="max-w-lg mx-auto shadow-none lg:shadow-md rounded-md my-12 p-2 lg:p-8">
+    <div class="max-w-lg mx-auto shadow-none lg:shadow-md rounded-md my-12 p-4 sm:p-8 bg-white">
 
         <h1>Login</h1>
 

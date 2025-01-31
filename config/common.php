@@ -7,13 +7,17 @@ return [
         ['name' => 'Product Category', 'route' => 'productcats.index'],
         ['name' => 'Users', 'route' => 'users']
     ],
-    'sorting-price' => [
+    'sorting' => [
         '' => 'Default',
-        'cheapest' => 'Termurah',
-        'most-expensive' => 'Termahal',
-        'latest' => 'Terbaru',
-        'oldest' => 'Terlama',
+        'termurah' => 'Termurah',
+        'termahal' => 'Termahal',
+        'terbaru' => 'Terbaru',
+        'terlama' => 'Terlama',
         'a-z' => 'A-Z',
         'z-a' => 'Z-A'
     ],
+    'filter-image' => [
+        'dengan-image' => 'Dengan Gambar',
+        'tanpa-image' => 'Tanpa Gambar',
+    ]
 ];

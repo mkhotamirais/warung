@@ -1,21 +1,26 @@
-@props(['sorting' => []])
+@props(['sorting' => [], 'name' => 'sort'])
 
-<form method="GET" action="{{ url()->current() }}" class="flex gap-1 overflow-x-scroll">
+<form method="GET" action="{{ url()->current() }}" class="flex gap-1 flex-wrap">
     @if (request('search'))
         <input type="hidden" name="search" value="{{ request('search') }}">
     @endif
 
-    {{-- @if (request('sort'))
+    @if (request('sort') && $name !== 'sort')
         <input type="hidden" name="sort" value="{{ request('sort') }}">
-    @endif --}}
+    @endif
 
     @if (request('category'))
         <input type="hidden" name="category" value="{{ request('category') }}">
     @endif
+
+    @if (request('filter_image') && $name !== 'filter_image')
+        <input type="hidden" name="filter_image" value="{{ request('category') }}">
+    @endif
+
     @foreach ($sorting as $key => $sort)
-        <label class="badge-filter {{ request('sort') == $key ? '!bg-blue-500 !text-white' : '' }}">
-            <input type="radio" name="sort" value="{{ $key }}"
-                {{ request('sort') == $key ? 'checked' : '' }} onchange="this.form.submit()" class="hidden">
+        <label class="badge-filter {{ request($name) == $key ? '!bg-blue-500 !text-white' : '' }}">
+            <input type="radio" name="{{ $name }}" value="{{ $key }}"
+                {{ request($name) == $key ? 'checked' : '' }} onchange="this.form.submit()" class="hidden">
             <span>{{ $sort }}</span>
         </label>
     @endforeach

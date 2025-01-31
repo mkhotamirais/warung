@@ -106,7 +106,7 @@ class ProductController extends Controller implements HasMiddleware
             // 'name' => ['required', 'max:255', Rule::unique('products')->ignore($product->id)],
             'name' => "required|max:255|unique:products,name,$product->id",
             'price' => 'required|integer',
-            'price_detail' => 'nullable',
+            'price_details' => 'nullable',
             'description' => 'nullable',
             'productcat_id' => 'nullable|integer|exists:productcats,id',
             'banner' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg|max:1024',

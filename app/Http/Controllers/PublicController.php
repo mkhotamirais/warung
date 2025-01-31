@@ -13,30 +13,33 @@ class PublicController extends Controller
         $total = Product::count();
         $totalCats = Productcat::count();
 
-        // $productcats = Productcat::orderBy('name')->get();
         // Ambil kategori produk dan hitung jumlah produk per kategori
         $productcats = Productcat::orderBy('name')->withCount('products')->get();
 
         $search = $request->search;
         $sort = $request->sort;
         $category_slug = $request->category;
+        $filter_image = $request->filter_image;
 
-        if ($sort === 'cheapest') {
+        // sorting
+        if ($sort === 'termurah') {
             $products = Product::orderBy('price');
-        } elseif ($sort === 'most-expensive') {
+        } elseif ($sort === 'termahal') {
             $products = Product::orderByDesc('price');
-        } elseif ($sort === 'latest') {
+        } elseif ($sort === 'terbaru') {
             $products = Product::latest();
-        } elseif ($sort === 'oldest') {
+        } elseif ($sort === 'terlama') {
             $products = Product::oldest();
         } elseif ($sort === 'a-z') {
             $products = Product::orderBy('name');
         } elseif ($sort === 'z-a') {
             $products = Product::orderByDesc('name');
         } else {
-            $products = Product::orderBy('name');
+            $products = Product::orderByRaw("CASE WHEN banner IS NOT NULL AND banner != '' THEN 1 ELSE 2 END")->orderBy('name');
+            // $products = Product::orderBy('name');
         }
 
+        // filtering
         if ($search) {
             $products = $products->where('name', 'like', "%$search%");
         }
@@ -47,7 +50,13 @@ class PublicController extends Controller
             });
         }
 
-        $products = $products->paginate(40);
-        return view("home", compact('total', 'totalCats', 'products', 'productcats', 'search', 'sort', 'category_slug'));
+        if ($filter_image === 'dengan-image') {
+            $products = $products->whereNotNull('banner');
+        } elseif ($filter_image === 'tanpa-image') {
+            $products = $products->whereNull('banner');
+        }
+
+        $products = $products->paginate(32);
+        return view("home", compact('total', 'totalCats', 'products', 'productcats', 'search', 'sort', 'category_slug', 'filter_image'));
     }
 }

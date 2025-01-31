@@ -30,12 +30,12 @@
             @enderror
         </div>
 
-        {{-- product price_detail --}}
+        {{-- product price_details --}}
         <div class="mb-3">
-            <label for="price_detail">Price Detail</label>
-            <textarea name="price_detail" id="price_detail" cols="30" rows="2"
-                class="input @error('price_detail') !ring-red-500 @enderror">{{ $product->price_details }}</textarea>
-            @error('price_detail')
+            <label for="price_details">Price Details</label>
+            <textarea name="price_details" id="price_details" cols="30" rows="2"
+                class="input @error('price_details') !ring-red-500 @enderror">{{ $product->price_details }}</textarea>
+            @error('price_details')
                 <p class="error">{{ $message }}</p>
             @enderror
         </div>
