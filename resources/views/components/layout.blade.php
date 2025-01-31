@@ -9,6 +9,8 @@
     <link rel="shortcut icon" href="{{ asset('storage/img/warungota.png') }}" type="image/x-icon">
 
     <title>{{ env('APP_NAME') }}</title>
+    <meta name="description" content="{{ config('common.meta.description') ?? 'Warung ota adalah warung milik bu yanti di bangong depan MA Nurul Iman' }}">
+    <meta name="keywords" content="{{ config('common.meta.keywords' ?? 'Warungota, Warung bu yanti, ota fotocopy, warung sembako, toko kelontong' }}">
 
     {{-- alpine --}}
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
