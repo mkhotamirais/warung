@@ -55,7 +55,7 @@ class ProductController extends Controller implements HasMiddleware
             'price_details' => 'nullable',
             'description' => 'nullable',
             'productcat_id' => 'nullable|integer|exists:productcats,id',
-            'banner' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            'banner' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg,webp,avif|max:1024',
         ]);
 
         $slug = Str::slug($fields['name']);
@@ -109,7 +109,7 @@ class ProductController extends Controller implements HasMiddleware
             'price_details' => 'nullable',
             'description' => 'nullable',
             'productcat_id' => 'nullable|integer|exists:productcats,id',
-            'banner' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            'banner' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg,webp,avif|max:1024',
             'delete_banner' => 'nullable|boolean'
         ]);
 
