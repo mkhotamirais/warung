@@ -38,7 +38,7 @@ Route::middleware([SetLocale::class])->group(function () {
 
     Route::middleware('auth')->group(function () {
 
-        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('verified')->name('dashboard');
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
         // email verification notice route
@@ -59,7 +59,7 @@ Route::middleware([SetLocale::class])->group(function () {
                 Route::get('/users', [DashboardController::class, 'users'])->name('users');
             });
         });
-    })->middleware('verified');
+    });
 });
 
 Route::get('/set-locale/{locale}', function ($locale) {
