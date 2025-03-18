@@ -72,7 +72,7 @@ class PublicController extends Controller
 
     public function blog()
     {
-        $blogs = Blog::latest()->tage(8)->get();
+        $blogs = Blog::latest()->take(8)->get();
         return view("public.blog.index", compact('blogs'));
     }
 
