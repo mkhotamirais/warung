@@ -5,29 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Blog extends Model
 {
-    /** @use HasFactory<\Database\Factories\ProductFactory> */
+    /** @use HasFactory<\Database\Factories\BlogFactory> */
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'title',
         'slug',
-        'description',
-        'price',
-        'price_details',
+        'content',
+        'blogcat_id',
         'banner',
-        'productcat_id',
     ];
 
     public function getRouteKeyName()
     {
         return 'slug';
-    }
-
-    public function productcat()
-    {
-        return $this->belongsTo(Productcat::class);
     }
 
     public function user()

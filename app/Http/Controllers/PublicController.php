@@ -2,13 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use App\Models\Product;
 use App\Models\Productcat;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PublicController extends Controller
 {
-    public function index(Request $request)
+    public function index()
+    {
+        $products = Product::orderByRaw("CASE WHEN banner IS NOT NULL AND banner != '' THEN 1 ELSE 2 END")->orderBy('name')->take(8)->get();
+        $blogs = Blog::latest()->take(8)->get();
+
+        return view("home", compact('products', 'blogs'));
+    }
+
+    public function product(Request $request)
     {
         $total = Product::count();
         $totalCats = Productcat::count();
@@ -57,6 +67,18 @@ class PublicController extends Controller
         }
 
         $products = $products->paginate(32);
-        return view("home", compact('total', 'totalCats', 'products', 'productcats', 'search', 'sort', 'category_slug', 'filter_image'));
+        return view("public.product.index", compact('total', 'totalCats', 'products', 'productcats', 'search', 'sort', 'category_slug', 'filter_image'));
+    }
+
+    public function blog()
+    {
+        $blogs = Blog::latest()->tage(8)->get();
+        return view("public.blog.index", compact('blogs'));
+    }
+
+    public function userBlogs(User $user)
+    {
+        $userBlogs = $user->blogs()->latest()->paginate(8);
+        return view("public.blog.userBlog", compact('userBlogs'));
     }
 }

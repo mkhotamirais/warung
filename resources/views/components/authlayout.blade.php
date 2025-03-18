@@ -20,26 +20,28 @@
 
 <body class="flex flex-col min-h-screen">
     {{-- header --}}
-    <header class="h-16 bg-white sticky top-0 z-50 border-b">
+    <header class="h-16 bg-white sticky top-0 !z-50 border-b">
         <div class="container flex items-center justify-between h-full">
-            <x-logo></x-logo>
-            {{-- logout btn --}}
-            <form action="{{ route('logout') }}" method="POST">
-                @csrf
-
-                <button type="submit" href="" class="btn">Logout</button>
-            </form>
+            <x-logo />
+            <x-auth-btn />
         </div>
     </header>
 
-    <nav class="container sticky top-16 bg-white z-50">
-        <div class="py-2 flex gap-2 overflow-x-scroll">
-            @foreach (config('common.menu') as $menu)
-                <a href="{{ route($menu['route']) }}"
-                    class="{{ request()->routeIs($menu['route']) ? '!bg-blue-600' : '' }} btn">{{ $menu['name'] }}</a>
-            @endforeach
-        </div>
-    </nav>
+    @if (auth()->user()->role !== 'user')
+        <nav class="container sticky top-16 bg-white z-40">
+            <div class="py-2 flex gap-2 overflow-x-scroll">
+                @foreach (config('common.menu') as $menu)
+                    @if (auth()->user()->role === 'editor' && $menu['route'] === 'users')
+                        @continue
+                    @endif
+                    <a href="{{ route($menu['route']) }}"
+                        class="{{ request()->routeIs($menu['route']) ? '!bg-blue-600' : '' }} btn">
+                        {{ $menu['name'] }}
+                    </a>
+                @endforeach
+            </div>
+        </nav>
+    @endif
 
     {{-- main --}}
     <main class="grow py-2 container">

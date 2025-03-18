@@ -19,8 +19,8 @@ class UserRole
         $user = Auth::user();
 
         if (!$user || !in_array($user->role, $roles)) {
-            // abort(403, 'Access Denied');
-            return redirect('/');
+            abort(403, 'Access Denied');
+            // return redirect('/');
         }
         return $next($request);
     }

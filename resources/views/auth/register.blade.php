@@ -1,6 +1,6 @@
 <x-layout>
     <div class="max-w-lg mx-auto shadow-none lg:shadow-md rounded-md my-12 p-2 lg:p-8 bg-white">
-        <h1>Register</h1>
+        <h1 class="title mb-4">Register</h1>
         <form action="{{ route('register') }}" method="POST">
             @csrf
 

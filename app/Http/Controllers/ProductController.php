@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Productcat;
+use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
@@ -18,13 +19,13 @@ class ProductController extends Controller implements HasMiddleware
     public static function middleware(): array
     {
         return [
-            // new Middleware('auth', only: ['store']),
-            // new Middleware('auth', except: ['show']),
             new Middleware('auth'),
         ];
     }
     public function index(Request $request)
     {
+        Gate::allowIf(fn(User $user) => $user->role === 'admin' || $user->role === 'editor');
+
         $products = Product::latest()->paginate(8);
         $myProducts = Product::where('user_id', Auth::id())->latest();
         $search = $request->search;

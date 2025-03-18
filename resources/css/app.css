@@ -5,6 +5,11 @@
 html {
     @apply scroll-smooth;
 }
+
+[x-cloak] {
+    display: none !important;
+}
+
 .ck-editor__editable {
     @apply h-24 resize-y;
 }
@@ -55,11 +60,19 @@ html {
 }
 
 .btn {
-    @apply py-2 px-3 rounded-lg text-white bg-blue-500 hover:bg-blue-600 transition-all min-w-max;
+    @apply py-2 px-3 rounded-lg text-white bg-blue-500 hover:bg-blue-600 transition-all min-w-max text-center;
 }
 
-h1 {
-    @apply text-2xl font-bold mb-4;
+.btn-lg {
+    @apply py-3 px-6 rounded-lg w-48 bg-blue-500 text-white border text-center border-blue-500 hover:bg-blue-600 transition-all font-semibold;
+}
+
+h1.title {
+    @apply text-2xl font-bold text-gray-800;
+}
+
+h2.title {
+    @apply font-semibold text-2xl text-gray-800;
 }
 
 .overflow-x-scroll::-webkit-scrollbar {

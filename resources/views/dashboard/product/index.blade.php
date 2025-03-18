@@ -46,7 +46,7 @@
 
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4">
             @foreach ($myProducts as $product)
-                <x-product-card :product="$product">
+                <x-card-product :product="$product">
                     <div class="mt-auto flex justify-end gap-1 items-center bg-gray-100 p-2 border-t">
                         {{-- update product --}}
                         <a href="{{ route('products.edit', $product) }}"
@@ -60,7 +60,7 @@
                                 class="bg-red-500 hover:bg-red-600 py-1 px-3 rounded-full text-white text-sm">Hapus</button>
                         </form>
                     </div>
-                </x-product-card>
+                </x-card-product>
             @endforeach
         </div>
         <div class="mt-4">
@@ -73,7 +73,7 @@
         <h2 class="text-xl font-semibold mb-2">All Product ({{ $products->total() }})</h2>
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4">
             @foreach ($products as $product)
-                <x-product-card :product="$product"></x-product-card>
+                <x-card-product :product="$product"></x-card-product>
             @endforeach
         </div>
 

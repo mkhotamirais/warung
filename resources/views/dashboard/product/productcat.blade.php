@@ -1,5 +1,5 @@
 <x-authlayout>
-    <h1>Product Category</h1>
+    <h1 class="title">Product Category</h1>
 
     @if (session('success'))
         <x-flash-msg message="{{ session('success') }}" bg="bg-green-500"></x-flash-msg>

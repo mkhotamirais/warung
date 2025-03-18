@@ -1,7 +1,7 @@
 <x-layout>
     <div class="max-w-lg mx-auto shadow-none lg:shadow-md rounded-md my-12 p-4 sm:p-8 bg-white">
 
-        <h1>Login</h1>
+        <h1 class="title mb-4">Login</h1>
 
         @if (session('error'))
             <x-flash-msg message="{{ session('error') }}" bg="bg-red-500"></x-flash-msg>
@@ -33,9 +33,14 @@
             </div>
 
             {{-- remember me --}}
-            <div class="mb-4 flex items-center gap-2">
-                <input type="checkbox" name="remember" id="remember">
-                <label for="remember" class="text-sm font-medium">Remember me</label>
+
+
+            <div class="mb-4 flex justify-between items-center">
+                <div class="mb-4 flex items-center gap-2">
+                    <input type="checkbox" name="remember" id="remember">
+                    <label for="remember" class="text-sm font-medium">Remember me</label>
+                </div>
+                <a href="{{ route('password.request') }}" class="text-xs text-blue-500">Forgot your password?</a>
             </div>
 
             <button type="submit" class="btn">Login</button>
